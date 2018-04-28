@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Stock Predictor</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <!-- Your custom styles (optional) -->
+    
+    <link href="stylesheets/style.css" rel="stylesheet">
+	<link href="stylesheets/mainPage.css" rel="stylesheet">
+  	<script type="text/javascript" src="javascripts/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="javascripts/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
+	<script type="text/javascript" src="javascripts/mainPage.js"></script>
+  <script type="text/javascript" src="javascripts/logout.js"></script>
+</head>
+
+<body onload="fn()">
+
+	<section class="navigation">
+    <span style=" width:100%; height:56px;">
+      <span class="logo">Stock Predictor</span>
+      <span class="nav-right">
+        <a class="nav-right-side" style="padding-right: 10px;" href="profile">
+            <i class="fa fa-fw fa-user"></i>Profile
+        </a>
+        <a class="nav-right-side" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>Logout
+        </a>
+      </span>
+    </span>
+</section>
+<div class="container">
+
+  
+   <marquee>
+     <p style="font-family: Impact; font-size: 18pt" id="marq">
+       Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor!
+       </p></marquee>
+
+</div>
+	<div class="container" id="comp">
+		
+
+<input type="hidden" id="currData" value="{{currDataObj}}">	
+	</div>
+  
+
+<div id="fetch" style="visibilty:hidden">
+
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button"  data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" onclick="logout()">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+	<footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © Stock Predictor  2018</small>
+        </div>
+      </div>
+    </footer>
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    
+</body>
+
+</html>

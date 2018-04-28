@@ -1,0 +1,23 @@
+.front, .back {
+	transition: -webkit-transform 1s;
+	-webkit-backface-visibility: hidden;
+}
+
+.front {
+    position: absolute;
+	z-index: 1;
+}
+
+.back {
+	
+	-webkit-transform: rotateY(-180deg);
+	
+}
+
+.info-card:hover .back {
+	-webkit-transform: rotateY(0);
+}
+
+.info-card:hover .front {
+	-webkit-transform: rotateY(180deg);
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Stock</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="stylesheets/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="stylesheets/style.css" rel="stylesheet">
+	<link href="stylesheets/signin.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="javascripts/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="javascripts/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+	<script type="text/javascript" src="javascripts/signin.js"></script>
+	
+</head>
+
+<body>
+	<div class="container">
+		
+        <div class="card card-container">
+			<div>
+				<div class="row">
+				  <div class="span6">
+					<div class="mycontent-left" onclick="toggle(0)">
+					Sign In
+					</div>
+				  </div>
+				  <div class="span6">
+					<div class="mycontent-right" onclick="toggle(1)">
+					Sign Up
+					</div>
+				  </div>
+				</div>
+				<hr class="division">
+			</div>
+			
+            
+            <div id="signinId">
+				
+				<img id="profile-img" class="profile-img-card" src="images/avatar_2x.png" />
+				<p id="profile-name" class="profile-name-card"></p>
+				<div id='msg'>
+
+					{{#if hasErrors}}
+					<div class="alert alert-danger">
+						{{# each errorMessages}}
+							<p>{{this}}</p>
+						{{/each}}
+					</div>
+					
+					{{/if}}
+					{{#if hasSuccess}}
+					<div class="alert alert-success">
+						{{# each successMessage}}
+							<p>{{this}}</p>
+						{{/each}}
+					</div>
+					
+					{{/if}}
+
+				</div>
+				
+				<form id="sign" class="form-signin" action="/signin" method="post">
+					<span id="reauth-email" class="reauth-email"></span>
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+					<input name="emailId" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+					<input name="pass" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+					<div id="remember" class="checkbox">
+						<label>
+							<input type="checkbox" value="remember-me"> Remember me
+						</label>
+					</div>
+					<button class="btn btn-lg btn-primary btn-block btn-signin" onclick="signin()">Sign in</button>
+				</form>
+				<!--<a href="#" class="forgot-password">
+					Forgot the password?
+				</a>-->
+			</div>
+			<div id="signupId" style="visibility:hidden; height:0px;">
+				<form class="form-signin" method="POST" action="/signup" id="signupForm">
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+					<div class="input-signup">
+					<span class="font"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+					<input type="text" id="nameId" name="name" class="form-control" placeholder="Your Name" required autofocus>					
+					</div>
+					<div class="input-signup">
+					<span class="font"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+					<input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>					
+					</div>
+					<div class="input-signup">
+					<span class="font"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+					<input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>					
+					</div>
+					<div class="input-signup">
+					<span class="font"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+					<input type="password" id="password" name="password" class="form-control" placeholder="Password" required autofocus>					
+					</div>
+					<div class="input-signup">
+					<span class="font"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+					<input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" onkeyup="validatePassword()" required autofocus>					
+					</div>
+					<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" >Sign up</button>
+				</form>				
+			</div>
+			
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+    
+	
+	
+    
+	
+</body>
+
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <!-- Your custom styles (optional) -->
+    
+    <link href="stylesheets/sb-admin.css" rel="stylesheet">
+    <link href="stylesheets/flip.css" rel="stylesheet">
+  	<script type="text/javascript" src="javascripts/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="javascripts/logout.js"></script>
+    <script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="javascripts/stockDetails.js"></script>
+	
+
+
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+
+
+<script type="text/javascript">
+
+$(function(){
+	$( "#dateStart" ).datepicker({ 
+    onSelect: function(date){
+
+        var selectedDate = new Date(date);
+        var msecsInADay = 86400000;
+        var endDate = new Date(selectedDate.getTime()-1 + msecsInADay);
+
+       //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
+        $("#dateEnd").datepicker( "option", "minDate", endDate );
+        $("#dateEnd").datepicker( "option", "maxDate", new Date() );
+
+    }
+});
+	//Pass the user selected date format
+	
+	$( "#format" ).change(function() {
+	
+	$( "#dateStart" ).datepicker( "option", "dateFormat", $(this).val() );
+	
+	});
+	});
+	
+	
+	
+$(function(){
+	$( "#dateEnd" ).datepicker({ 
+    
+    maxDate: new Date()});
+	//Pass the user selected date format
+	
+	$( "#format" ).change(function() {
+		
+	$( "#dateEnd" ).datepicker( "option", "dateFormat", $(this).val() );
+	
+	});
+	});
+    
+	
+</script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+<script type="text/javascript" src="javascripts/canvas.js"></script>
+</head>
+<!--<body >
+    <div class="container">
+        <div id="chartContainer" style="height: 347px; width: 50%;"></div>
+    </div>
+    <div class="container">
+            From: <input id="dateStart" type="text"  placeholder="Calender Start Date">
+            To: <input id="dateEnd" type="text"  placeholder="Calender End Date">
+            <input type="button" value="Get Details" onclick="fetch()">
+        </div>
+    
+</body>-->
+
+<body onload="load()" class="fixed-nav sticky-footer bg-dark" id="page-top" >
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="mainPage">Stock Predictor</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="companies">
+
+      </ul>
+      <ul class="navbar-nav ml-auto">
+		<li class="nav-item">
+        <a class="nav-link" href="profile">
+            <i class="fa fa-fw fa-user"></i>Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      
+      
+      <div class="row">
+        <div class="col-lg-8">
+          <!-- Area Chart Example-->
+		  <div class="card mb-3">
+			<div class="card-header">
+			  <i class="fa fa-area-chart"></i>Historical Data
+              <span style="float:right;font-family: inherit;" class="form-group">
+              From: <input id="dateStart" type="text"  placeholder="Calender Start Date">
+            To: <input id="dateEnd" type="text"  placeholder="Calender End Date">
+            <input type="button" value="Get Details" onclick="fetch()"></span> 
+              </div>
+			<div  id="chartContainer" style="height:420px;width:99%;">
+            <div class="container" style="visibility: hidden">
+            
+        </div>
+			 <!-- <canvas id="myAreaChart" width="100%" height="30"></canvas>-->
+			</div>
+			
+		  </div>
+        </div>
+        <div class="col-lg-4">
+          <!-- Example Pie Chart Card-->
+          
+          <!-- Example Notifications Card-->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-bell-o"></i> <span id="header"> Feed </span></div>
+            <div class="list-group list-group-flush small">
+              
+                
+                <div  id="feeds" style="height:370px;width:100%">
+                  
+                  
+                
+		
+                
+              </div>
+              <div class="card-header">
+              <span id="footer">Latest Headlines...</span> 
+              <button class="btn btn-success" style="float: right;" onclick="toggle()" id="switch">View Indicators</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Details</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered"  width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Company Name</th>
+                  <th>Reccomendation</th>
+                  <th>Open</th>
+                  <th>High</th>
+                  <th>Close</th>
+                  <th>Low</th>
+                </tr>
+              </thead>
+              <tbody id="cmpDetails">
+                
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © Stock Predictor  2018</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" onclick="logout()">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    
+    
+  </div>
+</body>
+
+
+
+</html>
